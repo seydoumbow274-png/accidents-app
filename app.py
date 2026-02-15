@@ -1,18 +1,14 @@
 from flask import Flask, render_template
 
+from flask import Flask, render_template
+
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')  # Page d'accueil
+    return render_template('index.html')
 
-@app.route('/accidents')
-def accidents():
-    return render_template('accidents.html')  # Page des accidents
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')  # Page de contact
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
