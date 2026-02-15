@@ -1,33 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-FICHIER_ACCIDENTS = "accidents.txt"
-
-@app.route('/', methods=['GET', 'POST'])
-def form():
-    if request.method == 'POST':
-        nom = request.form['nom']
-        lieu = request.form['lieu']
-        description = request.form['description']
-
-        with open(FICHIER_ACCIDENTS, "a") as f:
-            f.write(f"Accident signalé par {nom} à {lieu}. Description : {description}\n")
-
-        return f"Accident signalé par {nom} à {lieu}. Description : {description}"
-
-    return render_template('form.html')
-
+@app.route('/')
+def home():
+    return render_template('home.html')  # Page d'accueil
 
 @app.route('/accidents')
-def liste_accidents():
-    try:
-        with open(FICHIER_ACCIDENTS, "r") as f:
-            accidents = [line.strip() for line in f.readlines()]
-    except FileNotFoundError:
-        accidents = []
+def accidents():
+    return render_template('accidents.html')  # Page des accidents
 
-    return render_template('accidents.html', accidents=accidents)
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')  # Page de contact
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
