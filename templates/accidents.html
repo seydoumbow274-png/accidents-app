@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accidents Signalés</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #cc0000; }
+        .accident { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Liste des Accidents Signalés</h1>
+    {% if accidents %}
+        {% for accident in accidents %}
+            <div class="accident">{{ accident }}</div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun accident signalé pour l'instant.</p>
+    {% endif %}
+</body>
+</html>
