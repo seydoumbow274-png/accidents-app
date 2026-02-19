@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Carte des accidents</h2>
+
+<div id="map" style="height: 500px;"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    var map = L.map('map').setView([14.7167, -17.4677], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var accidents = {{ accidents | tojson }};
+
+    accidents.forEach(function(accident) {
+    var popupContent = "<b>" + accident.description + "</b>";
+
+    if (accident.photo) {
+        popupContent += "<br><img src='/static/uploads/" + accident.photo + "' width='150'>";
+    }
+
+    L.marker([accident.latitude, accident.longitude])
+        .addTo(map)
+        .bindPopup(popupContent);
+});
+
+</script>
+{% endblock %}

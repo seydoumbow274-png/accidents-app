@@ -1,0 +1,28 @@
+@app.route('/signaler', methods=['GET', 'POST'])
+def signaler():
+    if request.method == 'POST':
+        description = request.form['description']
+        latitude = float(request.form['latitude'])
+        longitude = float(request.form['longitude'])
+
+        photo = request.files['photo']
+        filename = None
+
+        if photo:
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        nouvel_accident = Accident(
+            lieu="",
+            description=description,
+            latitude=latitude,
+            longitude=longitude,
+            photo=filename
+        )
+
+        db.session.add(nouvel_accident)
+        db.session.commit()
+
+        return redirect('/carte')
+
+    return render_template('signaler.html')

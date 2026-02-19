@@ -1,10 +1,17 @@
+<<<<<<< HEAD
 # fly.toml app configuration file generated for accidents-app-pc3z3q on 2026-02-16T15:34:03Z
+=======
+# fly.toml app configuration file generated for accidents-app-blue-brook-5822 on 2026-02-16T19:58:52Z
+>>>>>>> cd220d9 (Ajout de la navigation, pages accueil et à propos, carte et signalement)
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'accidents-app-pc3z3q'
-primary_region = 'ams'
+
+=======
+app = 'accidents-app-blue-brook-5822'
+primary_region = 'fra'
+
 
 [build]
 

@@ -1,18 +1,16 @@
-# syntax=docker/dockerfile:1
+FROM python:3.12-slim
 
-ARG PYTHON_VERSION=3.12.3
-
-FROM python:${PYTHON_VERSION}-slim
-
-LABEL fly_launch_runtime="flask"
-
-WORKDIR /code
+WORKDIR /app
 
 COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=8080
+
 EXPOSE 8080
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
+CMD ["flask", "run"]

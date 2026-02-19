@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signaler un accident - Accidents App</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Accueil</a> |
+        <a href="/about">À propos</a> |
+        <a href="/signaler">Signaler un accident</a>
+    </nav>
+
+    <h1>Signaler un accident</h1>
+    <div id="map" style="height: 500px;"></div>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+</body>
+</html>

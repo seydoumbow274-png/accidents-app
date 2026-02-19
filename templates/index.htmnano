@@ -1,0 +1,34 @@
+<script>
+    // Initialisation de la carte centrée sur Dakar
+    var map = L.map('map').setView([-17.4439, 14.6928], 13);
+
+    // Ajouter les tuiles OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Ajouter un marqueur sur Dakar
+    L.marker([-17.4439, 14.6928]).addTo(map)
+        .bindPopup('Ici c\'est Dakar !')
+        .openPopup();
+
+    // --- GPS de l'utilisateur ---
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+
+            // Ajouter un marqueur pour l'utilisateur
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup('Vous êtes ici !')
+                .openPopup();
+
+            // Centrer la carte sur l'utilisateur
+            map.setView([lat, lon], 15);
+        }, function(error) {
+            console.log("Erreur GPS: " + error.message);
+        });
+    } else {
+        console.log("La géolocalisation n'est pas supportée par votre navigateur.");
+    }
+</script>

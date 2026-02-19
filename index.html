@@ -7,25 +7,32 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-</head><h1>Bienvenue sur Accidents App</h1>
+</head>
+<body>
+
+<h1>Bienvenue sur Accidents App</h1>
 
 <nav>
     <a href="/">Accueil</a> |
     <a href="/about">À propos</a>
 </nav>
 
-<body>
-
-<h2>Accidents App</h2>
-
 <div id="map" style="height: 500px;"></div>
 
 <button onclick="getLocation()">📍 Ma position</button>
 <button onclick="enableReport()">🚨 Signaler un accident</button>
 
-<script>
+<script>// Charger les accidents existants depuis le serveur
+fetch('/accidents')
+.then(response => response.json())
+.then(data => {
+    data.forEach(acc => {
+        L.marker([acc.lat, acc.lon]).addTo(map)
+         .bindPopup("Accident signalé")
+    });
+});
 
-var map = L.map('map').setView([14.7167, -17.4677], 13); // Dakar
+ var map = L.map('map').setView([14.7167, -17.4677], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
@@ -54,7 +61,6 @@ function getLocation() {
     );
 }
 
-
 function enableReport() {
     alert("Clique sur la carte pour signaler un accident");
 
@@ -73,7 +79,6 @@ function enableReport() {
             .openPopup();
     });
 }
-
 </script>
 
 </body>

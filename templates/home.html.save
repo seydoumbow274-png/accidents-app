@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accueil</title>
+</head>
+<body>
+    <h1>Bienvenue sur Accidents App</h1>
+</body>
+</html>
+{% extends "base.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<h1>Bienvenue sur Accidents App</h1>
+
+<!-- Ici ton code de carte existant -->
+<div id="map" style="height: 500px; width: 100%;"></div>
+<script>
+    // Copie-colle ici ton code JS actuel pour afficher la carte et les markers
+</script>
+
+<!-- autres contenus que tu avais sur la page d'accueil -->
+{% endblock %}
